@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+    http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+	version="1.0">
+	<persistence-unit name="saatchi_serverPU"
+		transaction-type="RESOURCE_LOCAL">
+		<class>uk.mafu.domain.saatchi.ArticleItem</class>
+		<class>uk.mafu.domain.saatchi.AttitudeItem</class>
+		<class>uk.mafu.domain.saatchi.Brand</class>
+		<class>uk.mafu.domain.saatchi.BrandStrategyGroup</class>
+		<class>uk.mafu.domain.saatchi.BrandStrategyItem</class>
+		<class>uk.mafu.domain.saatchi.NewsItem</class>
+		<class>uk.mafu.domain.saatchi.PhilosophyItem</class>
+		<class>uk.mafu.domain.saatchi.Product</class>
+		<class>uk.mafu.domain.saatchi.PurposeItem</class>
+		<class>uk.mafu.domain.saatchi.ViewItem</class>
+		<class>uk.mafu.domain.saatchi.Website</class>
+		<!-- Shared domain objects -->
+		<class>uk.mafu.loon.domain.data.LoonImage</class>
+		<class>uk.mafu.loon.domain.data.ImageLink</class>
+		<class>uk.mafu.loon.domain.data.LoonPdf</class>
+		<class>uk.mafu.loon.domain.data.PdfLink</class>
+		<class>uk.mafu.loon.domain.data.LoonVideo</class>
+		<class>uk.mafu.loon.domain.data.VideoLink</class>
+	</persistence-unit>
+</persistence>

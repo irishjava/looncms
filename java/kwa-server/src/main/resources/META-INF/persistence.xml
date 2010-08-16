@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+    http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+	version="1.0">
+	<persistence-unit name="kwa_serverPU"
+		transaction-type="RESOURCE_LOCAL">
+		<class>uk.mafu.kwa.domain.Award</class>
+		<class>uk.mafu.kwa.domain.Client</class>
+		<class>uk.mafu.kwa.domain.Excite</class>
+		<class>uk.mafu.kwa.domain.JobPosting</class>
+		<class>uk.mafu.kwa.domain.News</class>
+		<class>uk.mafu.kwa.domain.Person</class>
+		<class>uk.mafu.kwa.domain.Press</class>
+		<class>uk.mafu.kwa.domain.Project</class>
+		<class>uk.mafu.kwa.domain.ProjectCategory</class>
+		<class>uk.mafu.kwa.domain.ProjectSlide</class>
+		<class>uk.mafu.kwa.domain.Website</class>
+		<!-- Shared domain objects -->
+		<class>uk.mafu.loon.domain.data.AudioLink</class>
+		<class>uk.mafu.loon.domain.data.ImageLink</class>
+		<class>uk.mafu.loon.domain.data.LoonAudio</class>
+		<class>uk.mafu.loon.domain.data.LoonImage</class>
+		<class>uk.mafu.loon.domain.data.LoonPdf</class>
+		<class>uk.mafu.loon.domain.data.LoonVideo</class>
+		<class>uk.mafu.loon.domain.data.PdfLink</class>
+		<class>uk.mafu.loon.domain.data.VideoLink</class>
+	</persistence-unit>
+</persistence>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" initialize="init()">
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.TextArea;
+import flash.display.Sprite;
+import flash.events.MouseEvent;
+
+
+public function init():void {
+
+var tf:TextArea = new TextArea();
+tf.text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, " 
+            + "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
+tf.selectable = false;
+tf.wordWrap = true;
+tf.width = 150;
+hbox.addChild(tf);
+
+var square:Sprite = new Sprite();
+square.graphics.beginFill(0xFF0000);
+square.graphics.drawRect(0, 0, 40, 40);
+
+var m:MovieClip = new MovieClip();
+m.addChild(square);
+
+hbox.addChild(m);
+
+tf.mask = square;
+
+tf.addEventListener(MouseEvent.MOUSE_DOWN, drag);
+tf.addEventListener(MouseEvent.MOUSE_UP, noDrag);
+
+function drag(event:MouseEvent):void {
+    square.startDrag();
+}
+function noDrag(event:MouseEvent):void {
+    square.stopDrag();
+}
+}
+		]]>
+	</mx:Script>
+	<mx:Canvas id="canvas" width="100%" height="100%">
+		<mx:HBox id="hbox" width="100%" height="100%"/>
+	</mx:Canvas>
+</mx:Application>

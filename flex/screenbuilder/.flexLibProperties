@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flexLibProperties version="1">
+<includeClasses>
+<classEntry path="uk.mafu.flex.view.TreeDataDescriptor"/>
+<classEntry path="uk.mafu.flex.builders.display.SearchPage"/>
+<classEntry path="uk.mafu.flex.builders.RelationshipBuilder"/>
+<classEntry path="uk.mafu.flex.builders.display.SingleVideo"/>
+<classEntry path="uk.mafu.flex.builders.display.EntityPage"/>
+<classEntry path="uk.mafu.flex.builders.display.SingleImage"/>
+<classEntry path="uk.mafu.flex.builders.display.One2OneGroup"/>
+<classEntry path="uk.mafu.flex.builders.display.SingleAudio"/>
+<classEntry path="uk.mafu.flex.builders.LoonApplication"/>
+<classEntry path="uk.mafu.flex.builders.display.ImagePropertyEditorWindow"/>
+<classEntry path="uk.mafu.flex.builders.display.SinglePdf"/>
+<classEntry path="uk.mafu.flex.builders.display.SaveCancelGroup"/>
+<classEntry path="uk.mafu.flex.builders.display.custom.MultiRowTabNavigator"/>
+<classEntry path="uk.mafu.flex.builders.display.TextGroup"/>
+<classEntry path="uk.mafu.flex.components.LoonHorizontalList"/>
+<classEntry path="uk.mafu.flex.builders.ScreenBuilder"/>
+<classEntry path="uk.mafu.flex.builders.display.custom.TabBarExLine"/>
+<classEntry path="uk.mafu.flex.builders.display.EnumWidget"/>
+<classEntry path="uk.mafu.flex.builders.display.ImageGallery"/>
+<classEntry path="uk.mafu.flex.builders.display.ImageUploadWindow"/>
+<classEntry path="uk.mafu.flex.builders.display.NumericInput"/>
+<classEntry path="uk.mafu.flex.builders.display.CacheClearer"/>
+<classEntry path="uk.mafu.flex.builders.display.DisabledAccordionHeader"/>
+<classEntry path="uk.mafu.flex.builders.TitleLessPanel"/>
+<classEntry path="uk.mafu.flex.builders.display.custom.SearchableDatagrid"/>
+<classEntry path="uk.mafu.flex.builders.display.ClearableVideoDisplay"/>
+<classEntry path="uk.mafu.flex.builders.AbstractBuilder"/>
+<classEntry path="uk.mafu.flex.builders.display.VideoPanel"/>
+<classEntry path="uk.mafu.flex.builders.display.BooleanInput"/>
+<classEntry path="uk.mafu.flex.builders.display.Many2ManyGroup"/>
+<classEntry path="uk.mafu.flex.builders.display.AudioPanel"/>
+<classEntry path="uk.mafu.flex.builders.display.custom.TabBarEx"/>
+<classEntry path="uk.mafu.flex.builders.display.One2ManyGroup"/>
+<classEntry path="uk.mafu.flex.builders.display.RichTextWidget"/>
+<classEntry path="uk.mafu.flex.builders.display.EntityContainer"/>
+<classEntry path="uk.mafu.loon.AbstractPluginLoader"/>
+<classEntry path="uk.mafu.flex.builders.display.ImageEditorPane"/>
+<classEntry path="uk.mafu.flex.components.ImageItemRenderer"/>
+<classEntry path="uk.mafu.flex.builders.display.DateInput"/>
+<classEntry path="uk.mafu.flex.view.EntityListPanel"/>
+<classEntry path="uk.mafu.flex.builders.ScreenRenderer"/>
+</includeClasses>
+<includeResources/>
+<namespaceManifests/>
+</flexLibProperties>

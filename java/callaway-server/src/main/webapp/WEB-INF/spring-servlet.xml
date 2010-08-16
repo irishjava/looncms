@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+    <import resource="classpath:common-application-context.xml"/>
+    <import resource="classpath:datasource-context.xml"/>
+    <import resource="classpath:application-context.xml"/>
+    <import resource="classpath:scheduled-tasks.xml"/>
+
+    <!-- Handler mapping related stuff -->
+    <bean id="annotationHandler"
+          class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
+    <context:component-scan base-package="com.callaway.web"/>
+    <bean id="beanNameHandlerMapping"
+          class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+    <!-- End Handler mapping related stuff -->
+
+    <import resource="classpath:application-context.xml"/>
+    <!-- Remoting services -->
+    <bean name="/callaway" class="uk.mafu.loon.custom.hessian.Hessian1ServiceExporter">
+        <property name="service" ref="callawayService"/>
+        <property name="serviceInterface" value="com.callaway.service.CallawayService"/>
+        <property name="debug" value="true"/>
+    </bean>
+</beans>

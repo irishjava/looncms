@@ -1,0 +1,29 @@
+/* CSS file */
+.imageGallery {
+	/**backgroundColor:white;*/
+}
+	 	
+.textGroup {
+  	/** 	background-color:red;*/
+}
+		
+.textGroupLabel {
+	padding-top: 12; 
+    padding-bottom: 12;
+    padding-left: 12;
+    padding-right: 12;
+    border-style: solid;
+    border-color:#1DEA1D;
+}
+		 
+.textGroupTextArea{
+	/**padding-top: 55; 
+    padding-bottom: 12;
+    padding-left: 12;
+    padding-right: 12;
+    border-color:green;*/
+}
+global
+{
+	horizontalAlign: left;
+}

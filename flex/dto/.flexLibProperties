@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flexLibProperties version="1">
+<includeClasses>
+<classEntry path="uk.mafu.loon.dto.ImageThumb"/>
+<classEntry path="uk.mafu.loon.dto.ManyToManyResult"/>
+<classEntry path="uk.mafu.loon.dto.OneToManyResult"/>
+<classEntry path="uk.mafu.loon.dto.OneToOneResult"/>
+</includeClasses>
+<includeResources/>
+<namespaceManifests/>
+</flexLibProperties>

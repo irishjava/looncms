@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flexLibProperties version="1">
+<includeClasses>
+<classEntry path="uk.mafu.flex.util.ReflectionUtil"/>
+<classEntry path="uk.mafu.flex.meta.RelationshipMeta"/>
+<classEntry path="uk.mafu.flex.meta.DisplayMeta"/>
+<classEntry path="uk.mafu.flex.meta.ColumnSettings"/>
+<classEntry path="uk.mafu.loon.AbstractConfiguration"/>
+<classEntry path="uk.mafu.flex.meta.ROW"/>
+<classEntry path="uk.mafu.flex.meta.OrderSettings"/>
+<classEntry path="uk.mafu.loon.tree.Branch"/>
+<classEntry path="uk.mafu.flex.meta.ClassMeta"/>
+<classEntry path="uk.mafu.flex.meta.MetaData"/>
+<classEntry path="uk.mafu.loon.tree.Action"/>
+<classEntry path="uk.mafu.flex.meta.ChooserSettings"/>
+<classEntry path="uk.mafu.flex.meta.BadDefinitionError"/>
+<classEntry path="uk.mafu.flex.meta.WidgetDef"/>
+<classEntry path="uk.mafu.loon.tree.Leaf"/>
+<classEntry path="uk.mafu.flex.meta.TAB"/>
+</includeClasses>
+<includeResources/>
+<namespaceManifests/>
+</flexLibProperties>

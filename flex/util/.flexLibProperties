@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flexLibProperties version="1">
+<includeClasses>
+<classEntry path="uk.mafu.flex.util.Assert"/>
+<classEntry path="uk.mafu.flex.util.ContextUtil"/>
+<classEntry path="uk.mafu.flex.util.FaultType"/>
+<classEntry path="uk.mafu.flex.util.FaultUtil"/>
+<classEntry path="uk.mafu.flex.util.LoonStringUtil"/>
+<classEntry path="uk.mafu.flex.util.Util"/>
+</includeClasses>
+<includeResources/>
+<namespaceManifests/>
+</flexLibProperties>

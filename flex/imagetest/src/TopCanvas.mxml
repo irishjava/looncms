@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" alpha="0">
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			
+			private function init():void {
+				trace(this.parent);
+			}
+		]]>
+	</mx:Script>
+	<!--
+	<mx:HRule id="hrule" width="100" height="100" x="0" y="{hrule.parent.height - 15}" initialize="init()" mouseDown="{hrule.startDrag()}" mouseUp="{hrule.stopDrag()}"/>
+	-->
+</mx:Canvas>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" initialize="initImage()">
+	<mx:Script>
+		<![CDATA[
+			import mx.core.IRawChildrenContainer;
+			import mx.core.IFlexDisplayObject;
+			import mx.containers.Canvas;
+			import mx.controls.Alert;
+			private var loader:Loader;
+			
+	
+			private function initImage():void {
+				loader = new Loader();
+				function initListener(evt:Event):void{
+					function mouse_over_image(evt:MouseEvent):void {
+						xval.text = evt.localX.toString();
+						yval.text = evt.localY.toString();
+						pixelVal.text = bmap.bitmapData.getPixel32(evt.localX ,evt.localY).toString();
+					}
+					trace(evt);
+					this.image  = new Image();
+					image.data  = loader.content;
+					var bmap:Bitmap = Bitmap(loader.content);
+					trace(bmap.bitmapData.getPixel32(0,0));
+					trace("height" + bmap.bitmapData.height);
+					trace("width" + bmap.bitmapData.width);           
+					trace(bmap.bitmapData.getPixel32(bmap.bitmapData.width -1 ,bmap.bitmapData.height-1));
+					image.addEventListener(MouseEvent.MOUSE_DOWN,mouse_over_image);
+				}
+				loader.contentLoaderInfo.addEventListener(Event.INIT,initListener);
+				loader.load(new URLRequest("./runningman.jpg"));
+			}
+			
+			private function removeOverlay():void{
+				this.image.mask = null;
+			}
+			
+			private function addOverlay():void{
+
+				var largeMask:Sprite  = new Sprite();
+				
+				largeMask.graphics.beginFill(0xFFFFFF, 0);
+                largeMask.graphics.drawRect(0,0,800,800);
+                largeMask.graphics.endFill();
+				
+				
+                largeMask.graphics.beginFill(0x000000, 0.5);
+                //x,y,width,height
+                var cropX:Number = (this.image.width/5)*1;//10 ;//
+                this.cropX.text = cropX.toString();
+                var cropY:Number = (this.image.height/5)*1;//10; //
+                this.cropY.text = cropY.toString();
+                var cropWidth:Number =  (this.image.width/5)*4;//this.image.width -10; //
+                this.cropWidth.text =  cropWidth.toString();
+                var cropHeight:Number = (this.image.height/5)*4;//this.image.height -10; //
+                this.cropHeight.text = cropHeight.toString();
+                
+                largeMask.graphics.drawRect(0,0,cropX,image.height);
+                largeMask.graphics.endFill();
+
+               	(this.image.parent as IRawChildrenContainer).rawChildren.addChild(largeMask);
+                largeMask.x = this.image.x;
+                largeMask.y = this.image.y;
+                
+                image.parent.addEventListener(MouseEvent.MOUSE_MOVE,mouse_move_listener);
+      			
+      			function mouse_click_listener(m:MouseEvent):void{
+      				Alert.show(
+      				"mouse clicked");
+      			}
+      			
+      			
+      			var prevX :Number = 0;
+      			var prevY :Number = 0;
+      			function mouse_move_listener(evt:MouseEvent):void {
+      				//trace(evt);
+      				var moveX:Number = 0;
+      				var moveY:Number = 0;
+      				if(evt.localX != prevX){
+      					moveX = ( evt.localX - prevX );
+      					prevX = evt.localX
+      				}
+      				if(evt.localY != prevY){
+      					moveY = evt.localY - prevY;
+      					prevY = evt.localY
+      				}
+      				
+      				if(evt.localX < image.width && 
+      				evt.localY < image.height
+      				){
+      					largeMask.x = evt.localX - (largeMask.width/2); 
+      					largeMask.y = evt.localY - (largeMask.height/2);
+      				}
+      				
+      			}
+      			largeMask.cacheAsBitmap = false;
+      			this.imageCanvas.cacheAsBitmap = false;
+      			this.imageCanvas.mask = largeMask;
+      			this.imageCanvas.blendMode = BlendMode.SUBTRACT;
+      			
+			}
+		]]>
+	</mx:Script>
+	<mx:Grid>
+		<mx:GridRow width="100%" height="100%">
+			<mx:GridItem width="100%" height="100%">
+			</mx:GridItem>
+			<mx:GridItem width="100%" height="100%">
+				<mx:Label text="Image Editing Component" width="100%"/>
+			</mx:GridItem>
+			<mx:GridItem width="100%" height="100%">
+			</mx:GridItem>
+		</mx:GridRow>
+		<mx:GridRow width="100%" height="100%">
+			<mx:GridItem width="100%" height="100%">
+				<mx:VBox height="100%">
+					<mx:Button label="Crop" width="100%"/>
+					<mx:Button label="Save" width="100%"/>
+					<mx:Button label="Upload New"/>
+					<mx:Button label="Overlay" width="100%" click="addOverlay()"/>
+					<mx:Button label="Remove Overlay" width="100%" click="removeOverlay()"/>
+				</mx:VBox>
+			</mx:GridItem>
+			<mx:GridItem width="100%" height="100%">
+			<mx:Canvas id="imageCanvas" width="800" height="800" backgroundColor="red">
+					<mx:Image id="image" y="0" x="0"/>
+			</mx:Canvas>
+				
+			</mx:GridItem>
+			<mx:GridItem width="100%" height="100%">
+				<mx:VBox height="100%">
+					<mx:HBox width="100%">
+						<mx:Label text="x(width):"/>
+						<mx:Label id="xval" text=""/>
+					</mx:HBox>
+					<mx:HBox width="100%">
+						<mx:Label text="y(height):"/>
+						<mx:Label id="yval" text=""/>
+					</mx:HBox>
+					<mx:HBox width="100%">
+						<mx:Label text="pixelVal:"/>
+						<mx:Label id="pixelVal" text=""/>
+					</mx:HBox>
+					<mx:HBox width="100%">
+						<mx:Label text="cropX:"/>
+						<mx:Label id="cropX" text=""/>
+					</mx:HBox>
+					<mx:HBox width="100%">
+						<mx:Label text="cropY:"/>
+						<mx:Label id="cropY" text=""/>
+					</mx:HBox>
+					<mx:HBox width="100%">
+						<mx:Label text="cropHeight:"/>
+						<mx:Label id="cropHeight" text=""/>
+					</mx:HBox>
+					<mx:HBox width="100%" id="imageTarget">
+						<mx:Label text="cropWidth:"/>
+						<mx:Label id="cropWidth" text=""/>
+					</mx:HBox>
+					
+				</mx:VBox>
+			</mx:GridItem>
+		</mx:GridRow>
+		<mx:GridRow width="100%" height="100%">
+			<mx:GridItem width="100%" height="100%">
+			</mx:GridItem>
+			<mx:GridItem width="100%" height="100%">
+			</mx:GridItem>
+			<mx:GridItem width="100%" height="100%">
+			</mx:GridItem>
+		</mx:GridRow>
+	</mx:Grid>
+</mx:Application>

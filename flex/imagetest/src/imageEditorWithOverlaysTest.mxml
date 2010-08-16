@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" xmlns:ns1="*" initialize="init()">
+
+<mx:Canvas width="800" height="800" backgroundColor="black">
+	<mx:Image id="image2" mouseMove="mouse_move_over_image(event)"/>
+</mx:Canvas>
+
+	<mx:Script>
+		<![CDATA[
+			
+			private function mouse_move_over_image(evt:Event):void {
+				trace(evt);
+				image2.x = 200;
+			}
+					
+			public var l:Loader = new Loader();
+				private function init():void{
+					l.contentLoaderInfo.addEventListener(Event.INIT,init_listener);
+					//l.addEventListener(Event.INIT,init_listener);
+					l.load(new URLRequest("./runningman.jpg"));
+					function init_listener(evt:*):void{
+						var bmap:Bitmap = Bitmap(l.content);
+						trace(l.content);
+						trace(image2);
+						image2.data =bmap;
+						var o:OverlayBox = new OverlayBox(image2);
+					}
+			}
+		]]>
+	</mx:Script>
+</mx:Application>

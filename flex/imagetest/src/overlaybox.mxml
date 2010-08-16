@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:UIComponent xmlns:mx="http://www.adobe.com/2006/mxml" initialize="init()">
+	<mx:Script>
+		<![CDATA[
+			import mx.containers.Canvas;
+			private function init():void{
+				var left:Canvas = new Canvas();
+				left.setStyle("backgroundColor","#EC3737");
+				left.width  = 20;
+				left.height = 700;
+				left.x = 0;
+				left.y = 0;
+				left.alpha = 0.5;
+				this.addChild(left);				 
+			}
+		]]>
+	</mx:Script>
+</mx:UIComponent>

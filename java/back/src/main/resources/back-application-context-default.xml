@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+">
+	<import resource="classpath:common-application-context.xml" />
+	<bean id="loonExceptionTranslatorImpl" class="uk.mafu.loon.exception.LoonExceptionTranslatorImpl" />
+	<bean id="HessianCleanerAspect" class="uk.mafu.loon.aop.HessianCleanerAspect">
+		<constructor-arg>
+			<ref bean="loonExceptionTranslatorImpl" />
+		</constructor-arg>
+	</bean>
+	<bean id="PermalinkAspect" class="uk.mafu.loon.aop.PermalinkAspect" />
+	<bean name="adminService" class="uk.mafu.loon.services.AdminServiceImpl">
+		<property name="entityManagerFactory" ref="entityManagerFactory"></property>
+	</bean>
+	<bean name="dataService" class="uk.mafu.loon.services.DataServiceImpl">
+		<property name="entityManagerFactory" ref="entityManagerFactory"></property>
+	</bean>
+	<aop:config>
+		<aop:pointcut id="adminServicePointcut"
+			expression="execution(* uk.mafu.loon.services.AdminServiceImpl.*(..))" />
+		<aop:pointcut id="dataServicePointcut"
+			expression="execution(* uk.mafu.loon.services.DataServiceImpl.*(..))" />
+		<aop:advisor id="adminTxAdvisor" pointcut-ref="adminServicePointcut"
+			advice-ref="adminTxAdvice" />
+		<aop:advisor id="adminTxAdvisor2" pointcut-ref="dataServicePointcut"
+			advice-ref="adminTxAdvice" />
+		<aop:aspect ref="HessianCleanerAspect">
+			<aop:pointcut id="hessianCleanerPointcut"
+				expression="execution(* uk.mafu.loon.services.AdminServiceImpl.*(..))" />
+			<aop:around pointcut-ref="hessianCleanerPointcut" method="decorate" />
+		</aop:aspect>
+		<aop:aspect ref="PermalinkAspect">
+			<aop:pointcut id="permalinkPointcut"
+				expression="execution(* uk.mafu.loon.services.AdminServiceImpl.save(..))" />
+			<aop:around pointcut-ref="permalinkPointcut" method="decorate" />
+		</aop:aspect>
+	</aop:config>
+	<tx:advice id="adminTxAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+</beans>

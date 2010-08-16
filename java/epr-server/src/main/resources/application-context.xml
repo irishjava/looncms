@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+">
+	<bean id="conf"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="location" value="classpath:epr.properties" />
+	</bean>
+
+	<import resource="classpath:back-servlet-context.xml" />
+	<import resource="classpath:back-application-context-default.xml" />
+	<import resource="classpath:/front-application-context-default.xml" />
+	<import resource="classpath:/front-loon-servlet-context.xml" />
+	<bean id="loonExceptionTranslatorImpl" class="uk.mafu.loon.exception.LoonExceptionTranslatorImpl" />
+	<bean id="HessianCleanerAspect" class="uk.mafu.loon.aop.HessianCleanerAspect">
+		<constructor-arg>
+			<ref bean="loonExceptionTranslatorImpl" />
+		</constructor-arg>
+	</bean>
+	<bean name="downloadsConfig" class="uk.mafu.loon.common.DownloadsConfig">
+		<constructor-arg index="0" type="java.lang.String"
+			value="${imageurl}" />
+		<constructor-arg index="1" type="java.lang.String"
+			value="${videourl}" />
+		<constructor-arg index="2" type="java.lang.String"
+			value="${pdfurl}" />
+	</bean>
+	<bean name="eprService" class="uk.mafu.loon.epr.front.EprServiceImpl">
+		<property name="entityManagerFactory" ref="entityManagerFactory">
+		</property>
+		<constructor-arg ref="downloadsConfig">
+		</constructor-arg>
+	</bean>
+	<aop:config>
+		<aop:pointcut id="eprServicePointcut"
+			expression="execution(* uk.mafu.loon.epr.front.EprServiceImpl.*(..))" />
+		<aop:pointcut id="eprDataServicePointcut"
+			expression="execution(* uk.mafu.loon.services.DataServiceImpl.*(..))" />
+		<aop:advisor id="eprTxAdvisor" pointcut-ref="eprServicePointcut"
+			advice-ref="eprTxAdvice" />
+		<aop:advisor id="eprTxAdvisor2" pointcut-ref="eprDataServicePointcut"
+			advice-ref="eprTxAdvice" />
+		<aop:aspect ref="HessianCleanerAspect">
+			<aop:pointcut id="eprHessianCleanerPointcut"
+				expression="execution(* uk.mafu.loon.epr.front.EprServiceImpl.*(..))" />
+			<aop:around pointcut-ref="eprHessianCleanerPointcut"
+				method="decorate" />
+		</aop:aspect>
+	</aop:config>
+	<tx:advice id="eprTxAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+</beans>

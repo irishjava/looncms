@@ -1,0 +1,29 @@
+## use glob syntax.
+syntax: glob
+*.ids
+*.iws
+*.swp
+*.orig
+*.log
+## *.pyc
+## *~
+## # switch to regexp syntax.
+## syntax: regexp
+## ^\.pc/
+syntax: regexp
+.*bin-debug.?
+.*\.svn.?
+.*classes.?
+.*\/WEB-INF\/lib\/.?
+.*lucene\-index/.?
+.*target.?
+.*temp/.?
+.*html\-template/.?
+.*\.bak\..*
+.*target-eclipse.?
+.*\.DS_Store$
+.?velocity\.log$
+.*\velocity.log$ 
+.*\/bin\/.*\.swc$
+flex\/out\/.*
+.*temp_flex.*\.xml

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" initialize="initImage()">
+	<mx:Script>
+		<![CDATA[
+			import com.emakmafu.controls.Overlay;
+			import mx.effects.effectClasses.AddRemoveEffectTargetFilter;
+			import mx.containers.Canvas;
+			import mx.controls.Alert;
+			private var loader:Loader;
+			
+	
+			private function initImage():void {
+				loader = new Loader();
+				function initListener(evt:Event):void{
+					
+					function mouse_over_image(evt:MouseEvent):void {
+						xval.text = evt.localX.toString();
+						yval.text = evt.localY.toString();
+						pixelVal.text = bmap.bitmapData.getPixel32(evt.localX ,evt.localY).toString();
+					}
+					
+					trace(evt);
+					this.image  = new Image();
+					image.data  = loader.content;
+					var bmap:Bitmap = Bitmap(loader.content);
+					trace(bmap.bitmapData.getPixel32(0,0));
+					trace("height" + bmap.bitmapData.height);
+					trace("width" + bmap.bitmapData.width);           
+					//trace(bmap.bitmapData.getPixel32(bmap.bitmapData.height,bmap.bitmapData.width));
+					trace(bmap.bitmapData.getPixel32(bmap.bitmapData.width -1 ,bmap.bitmapData.height-1));
+					//image.mouseX,
+					//rect.bottomRight.x,bmap.bitmapData.rect.bottomRight.y));
+					image.addEventListener(MouseEvent.MOUSE_DOWN,mouse_over_image);
+				}
+				loader.contentLoaderInfo.addEventListener(Event.INIT,initListener);
+				loader.load(new URLRequest("./runningman.jpg"));
+			}
+			
+			private function removeOverlay():void{
+				
+			}
+			
+			private function addOverlay():void{
+				var o:Overlay = new Overlay(2000,2000,0xFFFFFF,0.5);
+				o.addHole(this.imageFrame);
+				this.rawChildren.addChild(o);
+			}	
+			
+			
+		]]>
+	</mx:Script>
+	<mx:Grid>
+		<mx:GridRow width="100%" height="100%">
+			<mx:GridItem width="100%" height="100%">
+			</mx:GridItem>
+			<mx:GridItem width="100%" height="100%">
+				<mx:Label text="Image Editing Component" width="100%"/>
+			</mx:GridItem>
+			<mx:GridItem width="100%" height="100%">
+			</mx:GridItem>
+		</mx:GridRow>
+		<mx:GridRow width="100%" height="100%">
+			<mx:GridItem width="100%" height="100%">
+				<mx:VBox height="100%">
+					<mx:Button label="Crop" width="100%"/>
+					<mx:Button label="Save" width="100%"/>
+					<mx:Button label="Upload New"/>
+					<mx:Button label="Overlay" width="100%" click="addOverlay()"/>
+					<mx:Button label="Remove Overlay" width="100%" click="removeOverlay()"/>
+				</mx:VBox>
+			</mx:GridItem>
+			<mx:GridItem width="100%" height="100%">
+				<mx:Canvas id="imageFrame">
+					<mx:Image id="image" />	
+				</mx:Canvas>
+				
+			</mx:GridItem>
+			<mx:GridItem width="100%" height="100%">
+				<mx:VBox height="100%">
+					<mx:HBox width="100%">
+						<mx:Label text="x(width):"/>
+						<mx:Label id="xval" text=""/>
+					</mx:HBox>
+					<mx:HBox width="100%">
+						<mx:Label text="y(height):"/>
+						<mx:Label id="yval" text=""/>
+					</mx:HBox>
+					<mx:HBox width="100%">
+						<mx:Label text="pixelVal:"/>
+						<mx:Label id="pixelVal" text=""/>
+					</mx:HBox>
+		
+					<mx:HBox width="100%">
+						<mx:Label text="cropX:"/>
+						<mx:Label id="cropX" text=""/>
+					</mx:HBox>
+					<mx:HBox width="100%">
+						<mx:Label text="cropY:"/>
+						<mx:Label id="cropY" text=""/>
+					</mx:HBox>
+					<mx:HBox width="100%">
+						<mx:Label text="cropHeight:"/>
+						<mx:Label id="cropHeight" text=""/>
+					</mx:HBox>
+					<mx:HBox width="100%" id="imageTarget">
+						<mx:Label text="cropWidth:"/>
+						<mx:Label id="cropWidth" text=""/>
+					</mx:HBox>
+					
+				</mx:VBox>
+			</mx:GridItem>
+		</mx:GridRow>
+		<mx:GridRow width="100%" height="100%">
+			<mx:GridItem width="100%" height="100%">
+			</mx:GridItem>
+			<mx:GridItem width="100%" height="100%">
+			</mx:GridItem>
+			<mx:GridItem width="100%" height="100%">
+			</mx:GridItem>
+		</mx:GridRow>
+	</mx:Grid>
+</mx:Application>

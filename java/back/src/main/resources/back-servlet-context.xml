@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+">
+	<bean id="handlerMapping" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
+	<bean id="handler1" class="uk.mafu.loon.mvc.exception.UploadExceedsMaxSizeHandler">
+		<property name="order">
+			<value>1</value>
+		</property>
+	</bean>
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="285000" />
+		<!-- <property name="resolveLazily" value="true" />-->
+	</bean>
+	<bean name="/imageUploadController" class="uk.mafu.loon.mvc.ImageUploadController">
+		<!-- <property name="commandClass" value="uk.mafu.loon.mvc.ImageUpload" />-->
+		<!-- <property name="formView" value="images/fileUpload" />-->
+		<!-- <property name="successView" value="images/fileUploadComplete" />-->
+		<property name="dataService" ref="dataService"></property>
+	</bean>
+	<bean name="/pdfViewController" class="uk.mafu.loon.mvc.PdfViewController">
+		<!-- <property name="commandClass" value="uk.mafu.loon.mvc.ImageUpload" />-->
+		<!-- <property name="formView" value="images/fileUpload" />-->
+		<!-- <property name="successView" value="images/fileUploadComplete" />-->
+		<property name="dataService" ref="dataService"></property>
+	</bean>
+	<bean name="/pdfPreviewController" class="uk.mafu.loon.mvc.PdfPreviewController">
+		<!-- <property name="commandClass" value="uk.mafu.loon.mvc.ImageUpload" />-->
+		<!-- <property name="formView" value="images/fileUpload" />-->
+		<!-- <property name="successView" value="images/fileUploadComplete" />-->
+		<property name="dataService" ref="dataService"></property>
+	</bean>
+	<bean name="/imageViewController" class="uk.mafu.loon.mvc.ImageViewController">
+		<!-- <property name="commandClass" value="uk.mafu.loon.mvc.ImageUpload" />-->
+		<!-- <property name="formView" value="images/fileUpload" />-->
+		<!-- <property name="successView" value="images/fileUploadComplete" />-->
+		<property name="dataService" ref="dataService"></property>
+	</bean>
+	<bean name="/videoViewController" class="uk.mafu.loon.mvc.LoonVideoViewController">
+		<!-- <property name="commandClass" value="uk.mafu.loon.mvc.ImageUpload" />-->
+		<!-- <property name="formView" value="images/fileUpload" />-->
+		<!-- <property name="successView" value="images/fileUploadComplete" />-->
+		<property name="dataService" ref="dataService"></property>
+	</bean>
+	<bean name="/audioViewController" class="uk.mafu.loon.mvc.LoonAudioViewController">
+		<!-- <property name="commandClass" value="uk.mafu.loon.mvc.ImageUpload" />-->
+		<!-- <property name="formView" value="images/fileUpload" />-->
+		<!-- <property name="successView" value="images/fileUploadComplete" />-->
+		<property name="dataService" ref="dataService"></property>
+	</bean>
+	<bean name="/thumbnailViewController" class="uk.mafu.loon.mvc.ThumbnailViewController">
+		<!-- <property name="commandClass" value="uk.mafu.loon.mvc.ImageUpload" />-->
+		<!-- <property name="formView" value="images/fileUpload" />-->
+		<!-- <property name="successView" value="images/fileUploadComplete" />-->
+		<property name="dataService" ref="dataService"></property>
+	</bean>
+	<!-- <bean id="controllermap" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+		<props>
+		<prop key="/loon/imageUploadController">imageUploadController</prop>
+		<prop key="/loon/imageViewController">imageViewController</prop>
+		<prop key="/loon/thumbnailViewController">thumbnailViewController</prop>
+		<prop key="/loon/adminService">/adminService</prop>
+		</props>
+		</property>
+		</bean>-->
+	<!-- Remoting services -->
+	<bean name="/adminService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="cacheableAdminService" />
+		<property name="serviceInterface" value="uk.mafu.loon.services.AdminService" />
+		<property name="debug" value="false" />
+	</bean>
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	<!-- Caching follows -->
+	<bean name="cachingListener" class="uk.mafu.loon.caching.CachingListener" />
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"></bean>
+	<bean id="cacheProviderFacade" class="org.springmodules.cache.provider.ehcache.EhCacheFacade">
+		<property name="cacheManager" ref="cacheManager" />
+	</bean>
+	<bean id="cacheableAdminService" class="org.springmodules.cache.interceptor.proxy.CacheProxyFactoryBean">
+		<property name="cacheProviderFacade" ref="cacheProviderFacade" />
+		<property name="cachingModels">
+			<props>
+				<prop key="load*">cacheName=adminServiceCache</prop>
+				<prop key="get*">cacheName=adminServiceCache</prop>
+			</props>
+		</property>
+		<property name="flushingModels">
+			<props>
+				<prop key="remove*">cacheNames=adminServiceCache</prop>
+				<prop key="save*">cacheNames=adminServiceCache</prop>
+				<prop key="upload*">cacheNames=adminServiceCache</prop>
+				<prop key="delete*">cacheNames=adminServiceCache</prop>
+			</props>
+		</property>
+		<property name="cachingListeners">
+			<list>
+				<ref bean="cachingListener" />
+			</list>
+		</property>
+		<property name="target" ref="adminService" />
+	</bean>
+	<!-- end caching config -->
+</beans>

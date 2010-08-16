@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+">
+    <bean id="loonExceptionTranslatorImpl" class="uk.mafu.loon.exception.LoonExceptionTranslatorImpl"/>
+    <bean id="hessianCleanerAspect" class="uk.mafu.loon.aop.HessianCleanerAspect">
+        <constructor-arg ref="loonExceptionTranslatorImpl"/>
+    </bean>
+    <bean id="loggingAspect" class="uk.mafu.loon.aop.LoggingAspect"/>
+    <bean name="callawayDao" class="com.callaway.service.CallawayDaoImpl">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean name="callawayMailer" class="com.callaway.service.CallawayMailerImpl">
+        <property name="mailSender" ref="mailSender"/>
+        <property name="templateMessage" ref="templateMessage"/>
+        <property name="velocityEngine" ref="velocityEngine"/>
+    </bean>
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="127.0.0.1"/>
+        
+    </bean>
+    <bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+         <property name="velocityProperties">
+            <value>
+               resource.loader=class
+               class.resource.loader.class=org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+            </value>
+         </property>
+      </bean>
+    <!-- this is a template message that we can pre-load with default state -->
+   <bean id="templateMessage" class="org.springframework.mail.SimpleMailMessage">
+        <property name="from" value="bryan@127.0.0.1"/>
+        <property name="subject" value="An invitation"/>
+    </bean>
+    <bean name="callawaySecurity" class="com.callaway.service.CallawaySecurityImpl">
+        <property name="clientSecret" value="${clientSecret}"/>
+        </bean>
+    <bean name="sessionHolder" class="com.callaway.service.SessionHolderImpl">
+    </bean>
+    <bean name="callawayService" class="com.callaway.service.CallawayServiceImpl">
+        <property name="dao" ref="callawayDao"/>
+        <property name="mailer" ref="callawayMailer"/>
+        <property name="security" ref="callawaySecurity"/>
+        <property name="session" ref="sessionHolder"/>
+    </bean>
+
+    <aop:config>
+        <aop:pointcut id="callawayDaoPointcut"
+                              expression="execution(* com.callaway.service.CallawayDaoImpl*.*(..))"/>
+        <aop:advisor pointcut-ref="callawayDaoPointcut"
+                     advice-ref="daoTxAdvice"/>
+        <aop:aspect ref="hessianCleanerAspect">
+            <aop:pointcut id="hessianCleanerPointcut"
+                          expression="execution(* com.callaway.service.CallawayServiceImpl.*(..))"/>
+            <aop:around pointcut-ref="hessianCleanerPointcut" method="decorate"/>
+        </aop:aspect>
+    </aop:config>
+    <tx:advice id="daoTxAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            <tx:method name="*"/>
+            <!--<tx:method name="*" read-only="true"/>-->
+    </tx:attributes>
+    </tx:advice>
+</beans>

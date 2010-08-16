@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flexLibProperties version="1">
+<includeClasses>
+<classEntry path="uk.mafu.loon.IAction"/>
+<classEntry path="uk.mafu.loon.IActionNode"/>
+<classEntry path="uk.mafu.loon.IBranch"/>
+<classEntry path="uk.mafu.loon.IConfiguration"/>
+<classEntry path="uk.mafu.loon.IConfigurationProvider"/>
+<classEntry path="uk.mafu.loon.IEntityContainer"/>
+<classEntry path="uk.mafu.loon.IExecutable"/>
+<classEntry path="uk.mafu.loon.IImageLoadedListener"/>
+<classEntry path="uk.mafu.loon.IImageThumbLoadedListener"/>
+<classEntry path="uk.mafu.loon.IImageUploadResult"/>
+<classEntry path="uk.mafu.loon.ILeaf"/>
+<classEntry path="uk.mafu.loon.INode"/>
+<classEntry path="uk.mafu.loon.IPluginLoader"/>
+<classEntry path="uk.mafu.loon.ISaveListener"/>
+<classEntry path="uk.mafu.loon.IService"/>
+<classEntry path="uk.mafu.loon.IUploader"/>
+<classEntry path="uk.mafu.loon.widget.IImageGallery"/>
+<classEntry path="uk.mafu.loon.widget.IPdfGallery"/>
+<classEntry path="uk.mafu.loon.widget.ISingleImage"/>
+<classEntry path="uk.mafu.loon.widget.ISinglePdf"/>
+<classEntry path="uk.mafu.loon.widget.ISingleVideo"/>
+<classEntry path="uk.mafu.loon.widget.IVideoGallery"/>
+</includeClasses>
+<includeResources/>
+<namespaceManifests/>
+</flexLibProperties>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flexLibProperties version="1">
+<includeClasses>
+<classEntry path="uk.mafu.loon.responder.AbstractResponder"/>
+<classEntry path="uk.mafu.loon.responder.DeleteSingleLinkResponder"/>
+<classEntry path="uk.mafu.loon.responder.GetAllResponder"/>
+<classEntry path="uk.mafu.loon.responder.LoadImageResponder"/>
+<classEntry path="uk.mafu.loon.responder.LoadImageThumbResponder"/>
+<classEntry path="uk.mafu.loon.responder.LoadManyToManyResponder"/>
+<classEntry path="uk.mafu.loon.responder.LoadOneToManyResponder"/>
+<classEntry path="uk.mafu.loon.responder.LoadOneToOneResponder"/>
+<classEntry path="uk.mafu.loon.responder.LoadPdfResponder"/>
+<classEntry path="uk.mafu.loon.responder.LoadResponder"/>
+<classEntry path="uk.mafu.loon.responder.LoadVideoResponder"/>
+<classEntry path="uk.mafu.loon.responder.RemoveImageResponder"/>
+<classEntry path="uk.mafu.loon.responder.RemovePdfResponder"/>
+<classEntry path="uk.mafu.loon.responder.RemoveResponder"/>
+<classEntry path="uk.mafu.loon.responder.RemoveVideoResponder"/>
+<classEntry path="uk.mafu.loon.responder.SaveManyToManyResponder"/>
+<classEntry path="uk.mafu.loon.responder.SaveOneToManyImagesResponder"/>
+<classEntry path="uk.mafu.loon.responder.SaveOneToManyResponder"/>
+<classEntry path="uk.mafu.loon.responder.SaveOneToOneResponder"/>
+<classEntry path="uk.mafu.loon.responder.SaveResponder"/>
+<classEntry path="uk.mafu.loon.responder.SaveSingleLinkResponder"/>
+<classEntry path="uk.mafu.loon.responder.UploadResponder"/>
+<classEntry path="uk.mafu.loon.service.ImageUploader"/>
+<classEntry path="uk.mafu.loon.service.ImageUploaderParam"/>
+<classEntry path="uk.mafu.loon.service.ImageUploaderResult"/>
+<classEntry path="uk.mafu.loon.service.LoonService"/>
+<classEntry path="uk.mafu.loon.service.ThumbCache"/>
+</includeClasses>
+<includeResources/>
+<namespaceManifests/>
+</flexLibProperties>

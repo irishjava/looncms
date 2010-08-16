@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" initialize="init()" width="1000" height="1000">
+	<mx:Script>
+		<![CDATA[
+			import mx.containers.Canvas;
+			import mx.utils.ColorUtil;
+			import com.emakmafu.controls.Overlay;
+			
+			private static var holeW:Number = 150;
+			private static var holeH:Number = 150;
+			private var o:Overlay;
+			private var moveListenerActive:Boolean = false;
+			
+			private function activate_move_listener(evt:MouseEvent):void{
+				moveListenerActive = !moveListenerActive;
+				if(moveListenerActive == true){
+					o.parent.addEventListener(MouseEvent.MOUSE_MOVE,move_listener);
+					//o.parent.addEventListener(MouseEvent.CLICK,activate_move_listener);
+				}
+				else {
+					o.parent.removeEventListener(MouseEvent.MOUSE_MOVE,move_listener);
+					//o.parent.removeEventListener(MouseEvent.CLICK,activate_move_listener);
+				}				
+			}
+			
+			
+			private function move_listener(evt:MouseEvent):void{
+				trace("listening :x:" + evt.stageX  + " :y:" + evt.stageY);
+				o.x = evt.stageX;
+				o.y = evt.stageY;
+			}
+			
+			
+			private function init():void{
+				o= new Overlay(400, 400,Color.RED,0.5);	
+				this.rawChildren.addChild(o);
+				var hole:Sprite = new Sprite();
+				hole.graphics.beginFill(Color.RED,1);
+				hole.graphics.drawRect(50,50,holeW,holeH);
+				hole.width = holeW ;
+				hole.height = holeH;
+				o.addHole(hole);
+				//hole.x =  100 + hole.x ;
+				//hole.y = 100 + hole.y  ;
+				
+
+			img.cacheAsBitmap =false;
+			hole.cacheAsBitmap = false;
+				o.addEventListener(MouseEvent.CLICK,activate_move_listener);
+				
+								
+			}
+		]]>
+	</mx:Script>
+	<mx:Image id="img" x="10" y="10" source="runningman.jpg"/>
+	<!--<mx:Canvas id="cvas" x="10" y="10" width="300" height="441" backgroundColor="#F61717" alpha="0.38">
+	</mx:Canvas>-->
+</mx:Application>

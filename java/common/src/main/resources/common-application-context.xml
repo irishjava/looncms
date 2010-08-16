@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+">
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${hibernate.connection.driver_class}" />
+		<property name="url" value="${hibernate.connection.url}" />
+		<property name="username" value="${hibernate.connection.username}" />
+		<property name="password" value="${hibernate.connection.password}" />
+	</bean>
+
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaVendorAdapter">
+			<bean class="uk.mafu.loon.custom.jpa.HibernateConfigurableJpaVendorAdapter">
+				<property name="jpaPropertyMap">
+					<map>
+						<entry key="hibernate.dialect" value="${hibernate.dialect}" />
+						<entry key="hibernate.connection.username" value="${hibernate.connection.username}" />
+						<entry key="hibernate.connection.password" value="${hibernate.connection.password}" />
+						<entry key="hibernate.show_sql" value="${hibernate.show_sql}" />
+						<entry key="hibernate.hbm2ddl.auto" value="${hibernate.hbm2ddl.auto}" />
+						<entry key="hibernate.generate_statistics" value="${hibernate.generate_statistics}" />
+						<entry key="hibernate.format_sql" value="${hibernate.format_sql}" />
+						<entry key="hibernate.use_sql_comments" value="${hibernate.use_sql_comments}" />
+						<entry key="hibernate.c3p0.min_size" value="${hibernate.c3p0.min_size}" />
+						<entry key="hibernate.c3p0.max_size" value="${hibernate.c3p0.max_size}" />
+						<entry key="hibernate.c3p0.timeout" value="${hibernate.c3p0.timeout}" />
+						<entry key="hibernate.c3p0.max_statements" value="${hibernate.c3p0.max_statements}" />
+						<entry key="hibernate.c3p0.testConnectionOnCheckout" value="${hibernate.c3p0.testConnectionOnCheckout}" />
+						<entry key="hibernate.search.default.directory_provider"
+							value="${hibernate.search.default.directory_provider}" />
+						<entry key="hibernate.search.default.indexBase" value="${hibernate.search.default.indexBase}" />
+						<entry key="hibernate.search.default.batch.merge_factor"
+							value="${hibernate.search.default.batch.merge_factor}" />
+						<entry key="hibernate.search.default.batch.max_buffered_docs"
+							value="${hibernate.search.default.batch.max_buffered_docs}" />
+					</map>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+</beans>

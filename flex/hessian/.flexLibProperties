@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flexLibProperties version="1">
+<includeClasses>
+<classEntry path="hessian.client.HessianProxy"/>
+<classEntry path="hessian.events.HessianResultEvent"/>
+<classEntry path="hessian.io.ObjectDefinition"/>
+<classEntry path="hessian.util.URL"/>
+<classEntry path="hessian.io.HessianOutput"/>
+<classEntry path="hessian.client.HessianStreamingService"/>
+<classEntry path="hessian.client.HessianOperation"/>
+<classEntry path="hessian.io.HessianProtocolError"/>
+<classEntry path="hessian.io.Double"/>
+<classEntry path="hessian.events.HessianErrorEvent"/>
+<classEntry path="hessian.io.Hessian2StreamingOutput"/>
+<classEntry path="hessian.mxml.HessianService"/>
+<classEntry path="hessian.client.HessianService"/>
+<classEntry path="hessian.mxml.HessianStreamingService"/>
+<classEntry path="hessian.io.Float"/>
+<classEntry path="hessian.io.Hessian2Constants"/>
+<classEntry path="hessian.io.HessianServiceError"/>
+<classEntry path="hessian.client.HessianAsyncToken"/>
+<classEntry path="hessian.io.Hessian2StreamingInput"/>
+<classEntry path="hessian.io.Hessian2Input"/>
+<classEntry path="hessian.client.HessianMessage"/>
+<classEntry path="hessian.io.AbstractHessianOutput"/>
+<classEntry path="hessian.io.AbstractHessianInput"/>
+</includeClasses>
+<includeResources/>
+<namespaceManifests/>
+</flexLibProperties>

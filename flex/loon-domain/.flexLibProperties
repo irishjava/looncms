@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flexLibProperties version="1">
+<includeClasses>
+<classEntry path="uk.mafu.loon.domain.data.AudioLink"/>
+<classEntry path="uk.mafu.loon.domain.data.ImageLink"/>
+<classEntry path="uk.mafu.loon.domain.data.LoonAudio"/>
+<classEntry path="uk.mafu.loon.domain.data.LoonImage"/>
+<classEntry path="uk.mafu.loon.domain.data.LoonPdf"/>
+<classEntry path="uk.mafu.loon.domain.data.LoonVideo"/>
+<classEntry path="uk.mafu.loon.domain.data.PdfLink"/>
+<classEntry path="uk.mafu.loon.domain.data.VideoLink"/>
+</includeClasses>
+<includeResources/>
+<namespaceManifests/>
+</flexLibProperties>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beansProjectDescription>
+	<version>1</version>
+	<pluginVersion><![CDATA[2.2.0.zmyeclipse75020090612]]></pluginVersion>
+	<configSuffixes>
+		<configSuffix><![CDATA[xml]]></configSuffix>
+	</configSuffixes>
+	<enableImports><![CDATA[true]]></enableImports>
+	<configs>
+		<config>src/main/webapp/WEB-INF/loon-servlet.xml</config>
+		<config>src/main/resources/application-context.xml</config>
+	</configs>
+	<configSets>
+		<configSet>
+			<name><![CDATA[gormley]]></name>
+			<allowBeanDefinitionOverriding>true</allowBeanDefinitionOverriding>
+			<incomplete>false</incomplete>
+			<configs>
+				<config>src/main/webapp/WEB-INF/loon-servlet.xml</config>
+				<config>src/main/resources/application-context.xml</config>
+			</configs>
+		</configSet>
+	</configSets>
+	<springVersion>1.2</springVersion>
+</beansProjectDescription>

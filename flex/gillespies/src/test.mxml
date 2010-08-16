@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="horizontal" styleName="textGroup">
+	<mx:Form width="100%" height="100%" >
+		<mx:FormHeading label="User Details Form" width="100%"/>
+		<mx:FormItem label="Name" width="100%" styleName="textGroupLabel">
+			<mx:TextArea width="100%"/>
+		</mx:FormItem>
+		<mx:FormItem width="100%"  horizontalAlign="left" direction="horizontal" label="Gender" styleName="textGroupLabel">
+			<mx:RadioButtonGroup id="commie"/>
+			<mx:HBox width="100%" height="100%">
+				<mx:RadioButton label="Male" groupName="commie"/>
+				<mx:RadioButton label="Female" groupName="commie"/>
+			</mx:HBox>
+		</mx:FormItem>
+		<mx:FormItem width="100%"  horizontalAlign="left" direction="horizontal" height="100%" label="HTML" styleName="textGroupLabel">
+			<mx:RichTextEditor width="100%" height="297" headerHeight="0">
+			</mx:RichTextEditor>
+		</mx:FormItem>
+		<mx:FormItem width="100%" styleName="textGroupLabel" horizontalAlign="left" direction="horizontal" height="100%">
+			<mx:HBox width="100%" height="100%">
+				<mx:Button label="Save"/>
+				<mx:Button label="Cancel"/>
+				<mx:Button label="Umm"/>
+			</mx:HBox>
+		</mx:FormItem>
+	</mx:Form>
+	<mx:Style source="application.css"/>
+</mx:Application>

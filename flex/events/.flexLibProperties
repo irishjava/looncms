@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties version="1">
+  <includeClasses>
+    <classEntry path="uk.mafu.loon.events.ApplicationErrorEvent"/>
+    <classEntry path="uk.mafu.loon.events.AudioEditEvent"/>
+    <classEntry path="uk.mafu.loon.events.CreateEntityEvent"/>
+    <classEntry path="uk.mafu.loon.events.CreateOneToOneRelationshipEvent"/>
+    <classEntry path="uk.mafu.loon.events.DeleteEntityEvent"/>
+    <classEntry path="uk.mafu.loon.events.DiscardEntityEvent"/>
+    <classEntry path="uk.mafu.loon.events.DisplayEntityEvent"/>
+    <classEntry path="uk.mafu.loon.events.EditImageEvent"/>
+    <classEntry path="uk.mafu.loon.events.EditManyToManyChildEvent"/>
+    <classEntry path="uk.mafu.loon.events.EditManyToManyEvent"/>
+    <classEntry path="uk.mafu.loon.events.EditOneToManyChildEvent"/>
+    <classEntry path="uk.mafu.loon.events.EditOneToManyEvent"/>
+    <classEntry path="uk.mafu.loon.events.EditOneToManyImagesEvent"/>
+    <classEntry path="uk.mafu.loon.events.EditOneToOneRelationshipChildEvent"/>
+    <classEntry path="uk.mafu.loon.events.EditOneToOneRelationshipEvent"/>
+    <classEntry path="uk.mafu.loon.events.EntitiesLoadedEvent"/>
+    <classEntry path="uk.mafu.loon.events.EntityLoadedEvent"/>
+    <classEntry path="uk.mafu.loon.events.EntityModifiedEvent"/>
+    <classEntry path="uk.mafu.loon.events.EntityRemovedEvent"/>
+    <classEntry path="uk.mafu.loon.events.EntitySavedEvent"/>
+    <classEntry path="uk.mafu.loon.events.ItemUploadedEvent"/>
+    <classEntry path="uk.mafu.loon.events.LoadEntityEvent"/>
+    <classEntry path="uk.mafu.loon.events.LoadOneToManyRelationshipEvent"/>
+    <classEntry path="uk.mafu.loon.events.LoadOneToOneRelationshipEvent"/>
+    <classEntry path="uk.mafu.loon.events.ManyToManyLoadedEvent"/>
+    <classEntry path="uk.mafu.loon.events.ManyToManySavedEvent"/>
+    <classEntry path="uk.mafu.loon.events.OneToManyImagesSavedEvent"/>
+    <classEntry path="uk.mafu.loon.events.OneToManyLoadedEvent"/>
+    <classEntry path="uk.mafu.loon.events.OneToManySavedEvent"/>
+    <classEntry path="uk.mafu.loon.events.OneToOneRelationshipLoadedEvent"/>
+    <classEntry path="uk.mafu.loon.events.OneToOneSavedEvent"/>
+    <classEntry path="uk.mafu.loon.events.PdfLoadedEvent"/>
+    <classEntry path="uk.mafu.loon.events.PdfRemovedEvent"/>
+    <classEntry path="uk.mafu.loon.events.RemoveImageEvent"/>
+    <classEntry path="uk.mafu.loon.events.RemovePdfEvent"/>
+    <classEntry path="uk.mafu.loon.events.RemoveVideoEvent"/>
+    <classEntry path="uk.mafu.loon.events.SaveEntityEvent"/>
+    <classEntry path="uk.mafu.loon.events.SaveOneToManyRelationshipEvent"/>
+    <classEntry path="uk.mafu.loon.events.SaveOneToOneRelationshipEvent"/>
+    <classEntry path="uk.mafu.loon.events.SingleImageModifiedEvent"/>
+    <classEntry path="uk.mafu.loon.events.UpdatePanelEvent"/>
+    <classEntry path="uk.mafu.loon.events.VideoLoadedEvent"/>
+    <classEntry path="uk.mafu.loon.events.VideoRemovedEvent"/>
+    <classEntry path="uk.mafu.loon.events.image.DeleteSingleImageEvent"/>
+    <classEntry path="uk.mafu.loon.events.image.EditSingleImageEvent"/>
+    <classEntry path="uk.mafu.loon.events.image.ImageEditEvent"/>
+    <classEntry path="uk.mafu.loon.events.image.ImageEditedEvent"/>
+    <classEntry path="uk.mafu.loon.events.image.ImageLoadedEvent"/>
+    <classEntry path="uk.mafu.loon.events.image.ImageRemovedEvent"/>
+    <classEntry path="uk.mafu.loon.events.image.ImageSavedEvent"/>
+    <classEntry path="uk.mafu.loon.events.image.ImageUploadEvent"/>
+    <classEntry path="uk.mafu.loon.events.image.UploadImageEvent"/>
+    <classEntry path="uk.mafu.loon.events.video.VideoEditEvent"/>
+    <classEntry path="uk.mafu.loon.executions.EditOneToManyImagesExecution"/>
+    <classEntry path="uk.mafu.loon.executions.EditSingleAudioExecution"/>
+    <classEntry path="uk.mafu.loon.executions.EditSinglePdfExecution"/>
+    <classEntry path="uk.mafu.loon.executions.EditSingleVideoExecution"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>

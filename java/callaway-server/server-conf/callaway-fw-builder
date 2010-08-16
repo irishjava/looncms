@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FWObjectDatabase SYSTEM "fwbuilder.dtd">
+<FWObjectDatabase xmlns="http://www.fwbuilder.org/1.0/" version="10" lastModified="1264432632" id="root">
+  <Library id="sysid99" name="Deleted Objects" comment="" ro="False"/>
+  <Library id="id1791X7108" color="#d2ffd0" name="User" comment="" ro="False">
+    <ObjectGroup id="id1792X7108" name="Objects" comment="" ro="False">
+      <ObjectGroup id="id1793X7108" name="Addresses" comment="" ro="False"/>
+      <ObjectGroup id="id1794X7108" name="DNS Names" comment="" ro="False"/>
+      <ObjectGroup id="id1795X7108" name="Address Tables" comment="" ro="False"/>
+      <ObjectGroup id="id1796X7108" name="Groups" comment="" ro="False"/>
+      <ObjectGroup id="id1797X7108" name="Hosts" comment="" ro="False"/>
+      <ObjectGroup id="id1798X7108" name="Networks" comment="" ro="False"/>
+      <ObjectGroup id="id1799X7108" name="Address Ranges" comment="" ro="False"/>
+    </ObjectGroup>
+    <ServiceGroup id="id1800X7108" name="Services" comment="" ro="False">
+      <ServiceGroup id="id1801X7108" name="Groups" comment="" ro="False"/>
+      <ServiceGroup id="id1802X7108" name="ICMP" comment="" ro="False"/>
+      <ServiceGroup id="id1803X7108" name="IP" comment="" ro="False"/>
+      <ServiceGroup id="id1804X7108" name="TCP" comment="" ro="False"/>
+      <ServiceGroup id="id1805X7108" name="UDP" comment="" ro="False"/>
+      <ServiceGroup id="id1806X7108" name="Users" comment="" ro="False"/>
+      <ServiceGroup id="id1807X7108" name="Custom" comment="" ro="False"/>
+      <ServiceGroup id="id1808X7108" name="TagServices" comment="" ro="False"/>
+    </ServiceGroup>
+    <ObjectGroup id="id1809X7108" name="Firewalls" comment="" ro="False"/>
+    <IntervalGroup id="id1810X7108" name="Time" comment="" ro="False"/>
+  </Library>
+</FWObjectDatabase>

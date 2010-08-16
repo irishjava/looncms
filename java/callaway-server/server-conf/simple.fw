@@ -1,0 +1,326 @@
+#!/bin/sh 
+#
+#  This is automatically generated file. DO NOT MODIFY !
+#
+#  Firewall Builder  fwb_ipt v3.0.5-1076 
+#
+#  Generated Mon Jan 25 15:38:55 2010 GMT by bryan
+#
+# files: * simple.fw
+#
+#
+# Compiled for iptables (any version)
+#
+#  
+#
+#
+#
+
+
+PATH="/sbin:/usr/sbin:/bin:/usr/bin:${PATH}"
+export PATH
+
+LSMOD="/sbin/lsmod"
+MODPROBE="/sbin/modprobe"
+IPTABLES="/sbin/iptables"
+IP6TABLES="/sbin/ip6tables"
+IPTABLES_RESTORE="/sbin/iptables-restore"
+IP6TABLES_RESTORE="/sbin/ip6tables-restore"
+IP="/sbin/ip"
+LOGGER="/usr/bin/logger"
+
+
+log() {
+  echo "$1"
+  test -x "$LOGGER" && $LOGGER -p info "$1"
+}
+
+check_file() {
+  test -r "$2" || {
+    echo "Can not find file $2 referenced by AddressTable object $1"
+    exit 1
+  }
+}
+
+va_num=1
+add_addr() {
+  addr=$1
+  nm=$2
+  dev=$3
+
+  type=""
+  aadd=""
+
+  L=`$IP -4 link ls $dev | head -n1`
+  if test -n "$L"; then
+    OIFS=$IFS
+    IFS=" /:,<"
+    set $L
+    type=$4
+    IFS=$OIFS
+    if test "$type" = "NO-CARRIER"; then
+      type=$5
+    fi
+
+    L=`$IP -4 addr ls $dev to $addr | grep inet | grep -v :`
+    if test -n "$L"; then
+      OIFS=$IFS
+      IFS=" /"
+      set $L
+      aadd=$2
+      IFS=$OIFS
+    fi
+  fi
+  if test -z "$aadd"; then
+    if test "$type" = "POINTOPOINT"; then
+      $IP -4 addr add $addr dev $dev scope global label $dev:FWB${va_num}
+      va_num=`expr $va_num + 1`
+    fi
+    if test "$type" = "BROADCAST"; then
+      $IP -4 addr add $addr/$nm dev $dev brd + scope global label $dev:FWB${va_num}
+      va_num=`expr $va_num + 1`
+    fi
+  fi
+}
+
+getInterfaceVarName() {
+  echo $1 | sed 's/\./_/'
+}
+
+getaddr() {
+  dev=$1
+  name=$2
+  L=`$IP -4 addr show dev $dev | grep inet | grep -v :`
+  test -z "$L" && { 
+    eval "$name=''"
+    return
+  }
+  OIFS=$IFS
+  IFS=" /"
+  set $L
+  eval "$name=$2"
+  IFS=$OIFS
+}
+
+getaddr6() {
+  dev=$1
+  name=$2
+  L=`$IP -6 addr show dev $dev | grep inet6 | grep -v :`
+  test -z "$L" && { 
+    eval "$name=''"
+    return
+  }
+  OIFS=$IFS
+  IFS=" /"
+  set $L
+  eval "$name=$2"
+  IFS=$OIFS
+}
+
+
+getinterfaces() {
+  NAME=$1
+  $IP link show | grep ": $NAME" | while read L; do
+    OIFS=$IFS
+    IFS=" :"
+    set $L
+    IFS=$OIFS
+    echo $2
+  done
+}
+
+
+# increment ip address
+incaddr()
+{
+  n1=$4
+  n2=$3
+  n3=$2
+  n4=$1
+
+  vn1=`eval  "echo \\$$n1"`
+
+  R=`expr $vn1 \< 255`
+  if test $R = "1"; then
+    eval "$n1=`expr $vn1 + 1`"
+  else
+    eval "$n1=0"
+    incaddr XX $n4 $n3 $n2
+  fi
+}
+
+
+prolog_commands() {
+echo "Running prolog script"
+
+}
+
+epilog_commands() {
+echo "Running epilog script"
+
+}
+
+run_epilog_and_exit() {
+  epilog_commands
+  exit $1
+}
+
+if $IP link ls >/dev/null 2>&1; then
+  echo;
+else
+  echo "iproute not found"
+  exit 1
+fi
+
+prolog_commands
+
+
+MODULES_DIR="/lib/modules/`uname -r`/kernel/net/"
+MODULES=`find $MODULES_DIR -name '*conntrack*'|sed  -e 's/^.*\///' -e 's/\([^\.]\)\..*/\1/'`
+for module in $MODULES; do 
+  if $LSMOD | grep ${module} >/dev/null; then continue; fi
+  $MODPROBE ${module} ||  exit 1 
+done
+
+
+# Using 0 address table files
+
+
+INTERFACES="eth0 lo "
+for i in $INTERFACES ; do
+  $IP link show "$i" > /dev/null 2>&1 || {
+    log "Interface $i does not exist"
+    exit 1
+  }
+done
+
+
+# Configure interfaces
+$IP -4 neigh flush dev eth0 >/dev/null 2>&1
+$IP -4 addr flush dev eth0 secondary label "eth0:FWB*" >/dev/null 2>&1
+
+
+add_addr 173.203.194.0 24 eth0
+$IP link set eth0 up
+add_addr 127.0.0.1 8 lo
+$IP link set lo up
+
+
+# Add virtual addresses for NAT rules
+
+
+log 'Activating firewall script generated Mon Jan 25 15:38:55 2010  by bryan'
+
+
+
+# ================ IPv4
+
+
+# ================ Table 'filter', automatic rules
+$IPTABLES -P OUTPUT  DROP
+$IPTABLES -P INPUT   DROP
+$IPTABLES -P FORWARD DROP
+
+cat /proc/net/ip_tables_names | while read table; do
+  $IPTABLES -t $table -L -n | while read c chain rest; do
+      if test "X$c" = "XChain" ; then
+        $IPTABLES -t $table -F $chain
+      fi
+  done
+  $IPTABLES -t $table -X
+done
+
+
+$IPTABLES -A INPUT   -m state --state ESTABLISHED,RELATED -j ACCEPT
+$IPTABLES -A OUTPUT  -m state --state ESTABLISHED,RELATED -j ACCEPT
+$IPTABLES -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+# ================ Table 'filter', rule set Policy
+# Policy compiler errors and warnings:
+# 
+# 
+# Rule 0 (eth0)
+# 
+echo "Rule 0 (eth0)"
+# 
+# 
+# 
+$IPTABLES -N In_RULE_0
+$IPTABLES -A INPUT  -i eth0  -s 173.203.194.0  -m state --state NEW  -j In_RULE_0 
+$IPTABLES -A FORWARD  -i eth0  -s 173.203.194.0  -m state --state NEW  -j In_RULE_0 
+$IPTABLES -A In_RULE_0  -j LOG  --log-level info --log-prefix "RULE 0 -- DENY "
+$IPTABLES -A In_RULE_0  -j DROP 
+# 
+# Rule 1 (lo)
+# 
+echo "Rule 1 (lo)"
+# 
+# 
+# 
+$IPTABLES -A INPUT  -i lo  -m state --state NEW  -j ACCEPT 
+$IPTABLES -A OUTPUT  -o lo  -m state --state NEW  -j ACCEPT 
+# 
+# Rule 2 (global)
+# 
+echo "Rule 2 (global)"
+# 
+# 
+# 
+$IPTABLES -A INPUT  -i + -p icmp  -m icmp  --icmp-type 11/0   -m state --state NEW  -j ACCEPT 
+$IPTABLES -A INPUT  -i + -p icmp  -m icmp  --icmp-type 11/1   -m state --state NEW  -j ACCEPT 
+$IPTABLES -A INPUT  -i + -p icmp  -m icmp  --icmp-type 0/0   -m state --state NEW  -j ACCEPT 
+$IPTABLES -A INPUT  -i + -p icmp  -m icmp  --icmp-type 3  -m state --state NEW  -j ACCEPT 
+$IPTABLES -A INPUT  -i + -p tcp -m tcp  -m multiport  --dports 80,22,25  -m state --state NEW  -j ACCEPT 
+# 
+# Rule 3 (global)
+# 
+echo "Rule 3 (global)"
+# 
+# server needs DNS to back-resolve clients IPs.
+# Even if it does not log host names during its
+# normal operations, statistics scripts such as
+# webalizer need it for reporting.
+# 
+$IPTABLES -A INPUT -p tcp -m tcp  -s 173.203.194.0  --dport 53  -m state --state NEW  -j ACCEPT 
+$IPTABLES -A INPUT -p udp -m udp  -s 173.203.194.0  --dport 53  -m state --state NEW  -j ACCEPT 
+$IPTABLES -A OUTPUT -p tcp -m tcp  --dport 53  -m state --state NEW  -j ACCEPT 
+$IPTABLES -A OUTPUT -p udp -m udp  --dport 53  -m state --state NEW  -j ACCEPT 
+# 
+# Rule 4 (global)
+# 
+echo "Rule 4 (global)"
+# 
+# this rule allows the server to send
+# statistics and reports via email. Disable
+# this rule if you do not need it.
+# 
+$IPTABLES -A OUTPUT  -o + -p tcp -m tcp  --dport 25  -m state --state NEW  -j ACCEPT 
+# 
+# Rule 5 (global)
+# 
+echo "Rule 5 (global)"
+# 
+# this rejects auth (ident) queries that remote
+# mail relays may send to this server when it
+# tries to send email out.
+# 
+$IPTABLES -A INPUT  -i + -p tcp -m tcp  --dport 113  -m state --state NEW  -j REJECT  
+# 
+# Rule 6 (global)
+# 
+echo "Rule 6 (global)"
+# 
+# 
+# 
+$IPTABLES -N In_RULE_6
+$IPTABLES -A INPUT  -i +  -m state --state NEW  -j In_RULE_6 
+$IPTABLES -A FORWARD  -i +  -m state --state NEW  -j In_RULE_6 
+$IPTABLES -A In_RULE_6   -j LOG  --log-level info --log-prefix "RULE 6 -- DENY "
+$IPTABLES -A In_RULE_6  -j DROP 
+
+epilog_commands
+
+echo 1 > /proc/sys/net/ipv4/ip_forward
+
+
+

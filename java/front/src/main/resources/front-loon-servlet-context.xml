@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+">
+	<bean id="handlerMapping" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
+	<bean name="/ImageView" class="uk.mafu.loon.mvc.ImageViewController">
+		<property name="dataService" ref="dataService"></property>
+	</bean>
+	<bean name="/AudioView" class="uk.mafu.loon.mvc.AudioViewController">
+		<property name="dataService" ref="dataService"></property>
+	</bean>
+	<bean name="/PdfView" class="uk.mafu.loon.mvc.PdfViewController">
+		<property name="dataService" ref="dataService"></property>
+	</bean>
+	<bean name="/VideoView" class="uk.mafu.loon.mvc.VideoViewController">
+		<property name="dataService" ref="dataService"></property>
+	</bean>
+	<bean name="/ThumbnailViewDontUSeME" class="uk.mafu.loon.mvc.ThumbnailViewController">
+		<property name="dataService" ref="dataService"></property>
+	</bean>
+</beans>

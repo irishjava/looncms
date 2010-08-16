@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence
+	xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+    http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+	version="1.0">
+	<persistence-unit
+		name="altoon_serverPU"
+		transaction-type="RESOURCE_LOCAL">
+		<class>uk.mafu.domain.altoon.Award</class>
+		<class>uk.mafu.domain.altoon.Bibliography</class>
+		<class>uk.mafu.domain.altoon.Location</class>
+		<class>uk.mafu.domain.altoon.News</class>
+		<class>uk.mafu.domain.altoon.Office</class>
+		<class>uk.mafu.domain.altoon.Person</class>
+		<class>uk.mafu.domain.altoon.Project</class>
+		<class>uk.mafu.domain.altoon.ProjectCategory</class>
+		<class>uk.mafu.domain.altoon.ProjectLink</class>
+		<class>uk.mafu.domain.altoon.Region</class>
+		<class>uk.mafu.domain.altoon.Role</class>
+		<class>uk.mafu.domain.altoon.Website</class>
+		<class>uk.mafu.loon.altoon.front.AltoonService</class>
+		<class>uk.mafu.loon.altoon.front.AltoonServiceImpl</class>
+		<!-- Shared domain objects -->
+		<class>uk.mafu.loon.domain.data.LoonImage</class>
+		<class>uk.mafu.loon.domain.data.ImageLink</class>
+		<class>uk.mafu.loon.domain.data.LoonPdf</class>
+		<class>uk.mafu.loon.domain.data.PdfLink</class>
+		<class>uk.mafu.loon.domain.data.LoonVideo</class>
+		<class>uk.mafu.loon.domain.data.VideoLink</class>
+	</persistence-unit>
+</persistence>

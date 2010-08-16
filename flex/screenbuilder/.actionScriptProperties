@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionScriptProperties mainApplicationPath="screenbuilder.as" version="3">
+<compiler additionalCompilerArguments="-incremental=true" copyDependentFiles="false" enableModuleDebug="true" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersion="9.0.28" htmlPlayerVersionCheck="true" outputFolderPath="bin" sourceFolderPath="src" strict="true" useApolloConfig="false" verifyDigests="true" warn="true">
+<compilerSourcePath/>
+<libraryPath defaultLinkType="1">
+<libraryPathEntry kind="4" path=""/>
+<libraryPathEntry kind="1" linkType="1" path="libs"/>
+<libraryPathEntry kind="3" linkType="1" path="/imglib/bin/imglib.swc" useDefaultLinkType="false"/>
+<libraryPathEntry kind="3" linkType="1" path="/util/bin/util.swc" useDefaultLinkType="false"/>
+<libraryPathEntry kind="3" linkType="1" path="/interfaces/bin/interfaces.swc" useDefaultLinkType="false"/>
+<libraryPathEntry kind="3" linkType="1" path="/events/bin/events.swc" useDefaultLinkType="false"/>
+<libraryPathEntry kind="3" linkType="1" path="/dto/bin/dto.swc" useDefaultLinkType="false"/>
+<libraryPathEntry kind="3" linkType="1" path="/loon-domain/bin/loon-domain.swc" useDefaultLinkType="false"/>
+<libraryPathEntry kind="3" linkType="1" path="/shared/bin/shared.swc" useDefaultLinkType="false"/>
+</libraryPath>
+<sourceAttachmentPath/>
+</compiler>
+<applications>
+<application path="screenbuilder.as"/>
+</applications>
+<modules/>
+<buildCSSFiles/>
+</actionScriptProperties>

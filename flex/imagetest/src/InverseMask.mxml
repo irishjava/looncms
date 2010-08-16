@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" backgroundGradientColors="[]" backgroundGradientAlphas="[]" viewSourceURL="srcview/index.html">
+    <mx:cacheAsBitmap>true</mx:cacheAsBitmap>
+    <mx:click>
+        <![CDATA[
+            inverse = !inverse;
+        ]]>
+    </mx:click>
+    <mx:Script>
+        <![CDATA[
+            [Bindable]
+            private var inverse : Boolean = false;
+        
+            override protected function updateDisplayList(unscaledWidth : Number, unscaledHeight : Number) : void {
+                super.updateDisplayList(unscaledWidth, unscaledHeight);
+                horizontalLines.graphics.clear();
+                horizontalLines.graphics.beginFill(0x667788, 1);
+                horizontalLines.graphics.drawRect(0, 0, width, height);
+                horizontalLines.graphics.endFill();
+                horizontalLines.graphics.lineStyle(1, 0xFF5566, 1);
+                var num : int = 6;
+                for (var k : int = 0; k < height / num; ++k) {
+                    horizontalLines.graphics.moveTo(0, k * num);
+                    horizontalLines.graphics.lineTo(width, k * (num + 1));
+                }
+
+                verticalLines.graphics.clear();
+                verticalLines.graphics.lineStyle(1, 0x55FF66, 1);
+                for (k = 0; k < width / num; ++k) {
+                    verticalLines.graphics.moveTo(k * num, 0);
+                    verticalLines.graphics.lineTo(k * (num + 1), height);
+                }
+            }
+        ]]>
+    </mx:Script>
+    <mx:Canvas id="horizontalLines" width="{width}" height="{height}"/>
+    <mx:Canvas id="containingCanvas">
+        <!-- needed to stop the blend form propagating to horizontalLine -->
+        <mx:cacheAsBitmap>true</mx:cacheAsBitmap>
+        
+        <mx:Canvas id="verticalLines" width="{width}" height="{height}">
+            <mx:cacheAsBitmap>true</mx:cacheAsBitmap>
+            <!-- set mask if we're doing a normal mask -->
+            <mx:mask>{inverse ? null : textDisplay}</mx:mask>
+        </mx:Canvas>
+        
+        <mx:Text id="textDisplay">
+            <mx:x>{(width - textDisplay.width) / 2}</mx:x>
+            <mx:y>{(height - textDisplay.height) / 2}</mx:y>
+            <mx:text>{inverse ? "Inverse Mask" : "Normal Mask"}</mx:text>
+            <mx:fontSize>70</mx:fontSize>
+            <mx:fontWeight>bold</mx:fontWeight>
+            <mx:cacheAsBitmap>true</mx:cacheAsBitmap>
+            
+            <!-- erase if we're doing an inverse mask -->
+            <mx:blendMode>{inverse ? BlendMode.ERASE : BlendMode.NORMAL}</mx:blendMode>
+        </mx:Text>
+    </mx:Canvas>
+</mx:Application>

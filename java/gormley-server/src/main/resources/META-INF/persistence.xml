@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+    http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+	version="1.0">
+	<persistence-unit name="gormley_pu" transaction-type="RESOURCE_LOCAL">
+		<class>uk.gormley.domain.AbstractLinkItem</class>
+		<class>uk.gormley.domain.AbstractPdfItem</class>
+		<class>uk.gormley.domain.AbstractStripItem</class>
+		<class>uk.gormley.domain.Art</class>
+		<class>uk.gormley.domain.ArtGroup</class>
+		<class>uk.gormley.domain.Catalogue</class>
+		<class>uk.gormley.domain.NewsItem</class>
+		<class>uk.gormley.domain.PressItem</class>
+		<class>uk.gormley.domain.TextResource</class>
+		<class>uk.gormley.domain.VideoResource</class>
+		<class>uk.gormley.domain.ImageResource</class>
+		<class>uk.gormley.domain.AudioResource</class>
+		<class>uk.gormley.domain.Show</class>
+		<class>uk.gormley.domain.Slide</class>
+		<class>uk.gormley.domain.StudioView</class>
+		<class>uk.gormley.domain.Website</class>
+		<!-- Shared domain objects -->
+		<class>uk.mafu.loon.domain.data.LoonAudio</class>
+		<class>uk.mafu.loon.domain.data.LoonImage</class>
+		<class>uk.mafu.loon.domain.data.LoonPdf</class>
+		<class>uk.mafu.loon.domain.data.LoonVideo</class>
+		<!-- Shared link objects-->
+		<class>uk.mafu.loon.domain.data.PdfLink</class>
+		<class>uk.mafu.loon.domain.data.ImageLink</class>
+		<class>uk.mafu.loon.domain.data.AudioLink</class>
+		<class>uk.mafu.loon.domain.data.VideoLink</class>
+	</persistence-unit>
+</persistence>

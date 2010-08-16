@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+     <bean id="schedule-conf"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="location" value="classpath:callaway.properties"/>
+    </bean>
+
+    <bean id="scheduledService" class="com.callaway.service.ScheduledServiceImpl">
+        <property name="mailer" ref="callawayMailer"/>
+        <property name="dao" ref="callawayDao"/>
+        <property name="recsRecipient" value="${cron.recsRecipient}"/>
+        <property name="recsSubject" value="${cron.recsSubject}"/>
+        <property name="signsRecipient" value="${cron.signsRecipient}"/>
+        <property name="signsSubject" value="${cron.signsSubject}"/>
+        <property name="mailHost" value="${cron.mailHost}"/>
+        <property name="from" value="${cron.from}"/>        
+    </bean>
+    <bean id="sendRecommendationsMail"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="scheduledService"/>
+        <property name="targetMethod" value="doSendRecommendationsMail"/>
+    </bean>
+    <bean id="sendSubscribersMail"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="scheduledService"/>
+        <property name="targetMethod" value="doSendSubscribersMail"/>
+    </bean>
+
+    <bean id="cronTrigger1" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="sendRecommendationsMail"/>
+        <property name="cronExpression" value="${cron.recommendations}"/>
+    </bean>
+    <bean id="cronTrigger2" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="sendSubscribersMail"/>
+        <property name="cronExpression" value="${cron.subscribers}"/>
+    </bean>
+
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref local="cronTrigger1"/>
+                <ref local="cronTrigger2"/>
+            </list>
+        </property>
+    </bean>
+    <!-- End scheduled client notification tasks -->
+</beans>
